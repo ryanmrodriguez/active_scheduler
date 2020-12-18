@@ -44,7 +44,7 @@ module ActiveScheduler
         end
 
         schedule[job] = {
-          class:        class_name,
+          class:        self.to_s,
           queue:        queue,
           args: [{
                    job_class:  class_name,
