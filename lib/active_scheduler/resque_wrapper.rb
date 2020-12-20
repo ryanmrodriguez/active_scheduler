@@ -7,7 +7,7 @@ module ActiveScheduler
 
       if defined?(::NewRelic)
         klass.define_singleton_method(:perform_later) do
-          NewRelic::Agent.set_transaction_name("#{self.class.name}/#{__method__}")
+          NewRelic::Agent.set_transaction_name("#{klass}/#{__method__}")
           super()
         end
       end
