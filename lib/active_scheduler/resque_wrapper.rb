@@ -5,13 +5,6 @@ module ActiveScheduler
       klass = Object.const_get job_data['job_class']
       named_args = job_data.delete('named_args') || false
 
-      if defined?(::NewRelic)
-        klass.define_singleton_method(:perform_later) do
-          NewRelic::Agent.set_transaction_name("#{klass}/#{__method__}")
-          super()
-        end
-      end
-
       if job_data.has_key? 'arguments'
         if named_args
           args = job_data['arguments'].first.symbolize_keys
